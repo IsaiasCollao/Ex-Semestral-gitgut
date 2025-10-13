@@ -1,4 +1,44 @@
 import sqlite3
+from flask import Flask, request, render_template
+
+
+
+app = Flask(__name__)
+
+@app.route('/')
+def inicio():
+    return render_template('principal.html')
+
+@app.route('/formulario')
+def formulario():
+    return render_template('formulario.html')
+
+@app.route('/agregar-compra', methods=['POST'])
+def agregar_compra():
+    nombre = request.form['nombre']
+    email = request.form['email']
+    direccion = request.form['direccion']
+    producto = request.form['producto']
+    cantidad = request.form['cantidad']
+    precio = request.form['precio']
+
+    conn = sqlite3.connect('database/mi_base_de_datos.db')
+    cursor = conn.cursor()
+    # Insertar cliente
+    cursor.execute("INSERT INTO cliente (nombre, email, direccion, empresa) VALUES (?, ?, ?, ?)", 
+                   (nombre, email, direccion, ""))
+    # Insertar orden de compra
+    cursor.execute("INSERT INTO ordencompra (producto, cantidad, precio) VALUES (?, ?, ?)", 
+                   (producto, cantidad, precio))
+    conn.commit()
+    conn.close()
+    mensaje = "¡Compra agregada correctamente!"
+    return render_template('formulario.html', mensaje=mensaje)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
 
 # Conectar (si no existe, se crea la base de datos)
 conn = sqlite3.connect('database/mi_base_de_datos.db')
