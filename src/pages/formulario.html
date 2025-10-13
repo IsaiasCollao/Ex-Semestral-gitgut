@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Compra</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="principal.html">Ir a la Pagina Principal</a>
+        <a href="principal.html">Ir a la Pagina Principal</a>
+    </nav>
+    <h1>Formulario de Compra</h1>
+    <form class="formulario" action="/submit" method="POST">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="direccion">Dirección:</label>
+        <input type="text" id="direccion" name="direccion" required>
+
+        <label for="producto">Producto:</label>
+        <select id="producto" name="producto" required>
+            <option value="producto1">Stock 1</option>
+            <option value="producto2">Stock 2</option>
+            <option value="producto3">Stock 3</option>
+        </select>
+
+        <button type="submit">Comprar</button>
+    </form>
+</body>
+</html>
