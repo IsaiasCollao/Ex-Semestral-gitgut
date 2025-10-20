@@ -1,3 +1,52 @@
+/* Estilos generales */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #333;
+    overflow: hidden;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.navbar a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.navbar a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.user-mensaje {
+    background-color: transparent;
+    color: #ffffff;
+    padding: 15px 20px;
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 500;
+    border: none;
+    box-shadow: none;
+    text-align: right;
+    font-family: inherit;
+    white-space: nowrap;
+}
+
+.user-mensaje:hover {
+    color: #007bff;
+    transition: color 0.3s ease;
+}
+
+/* Formularios generales */
 .formulario {
     max-width: 600px;
     margin: auto;
@@ -24,6 +73,7 @@
     margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    box-sizing: border-box;
 }
 
 .formulario button {
@@ -41,25 +91,106 @@
     background-color: #218838;
 }
 
-.navbar {
-    background-color: #333;
-    overflow: hidden;
+/* Login específico */
+.login-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 30px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.navbar a {
-    float: left;
-    display: block;
-    color: white;
+.login-container h2 {
     text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
+    margin-bottom: 25px;
+    color: #333;
 }
 
-.navbar a:hover {
-    background-color: #ddd;
-    color: black;
+.login-form {
+    width: 100%;
 }
 
+.login-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+}
+
+.login-form input[type="text"], 
+.login-form input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.login-form input[type="text"]:focus,
+.login-form input[type="password"]:focus {
+    border-color: #28a745;
+    outline: none;
+    box-shadow: 0 0 5px rgba(40, 167, 69, 0.3);
+}
+
+.login-form input[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.titulo1{
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.login-form input[type="submit"]:hover {
+    background-color: #218838;
+}
+
+/* Mensajes flash */
+.flash-messages {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.flash-messages li {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.flash-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.flash-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.flash-info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #bee5eb;
+}
+
+/* Alertas */
 .alerta {
     background: #d4edda;
     color: #155724;

@@ -8,10 +8,16 @@
 </head>
 <body>
     <nav class ="navbar">
-        <a href="{{ url_for('formulario') }}">Ir al Formulario de Compra</a>
+            <a href="{{ url_for('formulario') }}">Ir al Formulario de Compra</a>
+        {% if session.usuario %}
+        <a href="{{ url_for('login.logout') }}">Cerrar Sesión</a>
+        <span>Bienvenido, {{ session.usuario }}!</span>
+        {% else %}
+        <a href="{{ url_for('login.login') }}">Iniciar Sesión</a> 
+        {% endif %}
     </nav>
 
-
-    
+    <h1>Bienvenido a la Página Principal</h1>
+    <p>Esta es una aplicación de ejemplo para gestionar compras.</p>
 </body>
 </html>

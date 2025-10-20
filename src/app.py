@@ -1,9 +1,12 @@
 import sqlite3
-from flask import Flask, request, render_template
-
-
+from flask import Flask, request, render_template, redirect, url_for, session, flash
+from login import login_bp  # Importar el Blueprint de login
 
 app = Flask(__name__)
+app.secret_key = 'tu_clave_secreta_aqui'  # Necesario para manejar sesiones
+
+# Registrar el Blueprint de login
+app.register_blueprint(login_bp)
 
 @app.route('/')
 def inicio():
@@ -24,113 +27,56 @@ def agregar_compra():
 
     conn = sqlite3.connect('database/mi_base_de_datos.db')
     cursor = conn.cursor()
+    
     # Insertar cliente
     cursor.execute("INSERT INTO cliente (nombre, email, direccion, empresa) VALUES (?, ?, ?, ?)", 
                    (nombre, email, direccion, ""))
     # Insertar orden de compra
-    cursor.execute("INSERT INTO ordencompra (producto, cantidad, precio) VALUES (?, ?, ?)", 
+    cursor.execute("INSERT INTO ordencompra (producto, cantidad, precio) VALUES (?, ?, ?)",
                    (producto, cantidad, precio))
     conn.commit()
     conn.close()
+    
     mensaje = "¡Compra agregada correctamente!"
     return render_template('formulario.html', mensaje=mensaje)
 
+def crear_base_datos():
+    """Función para crear las tablas de la base de datos"""
+    conn = sqlite3.connect('database/mi_base_de_datos.db')
+    cursor = conn.cursor()
+    
+    cursor.execute('''
+    CREATE TABLE IF NOT EXISTS ordencompra (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        producto TEXT NOT NULL,
+        cantidad TEXT NOT NULL,
+        precio INTEGER,
+        fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )
+    ''')
+
+    cursor.execute('''
+    CREATE TABLE IF NOT EXISTS usuarios (
+        id INTEGER PRIMARY KEY AUTOINCREMENT, 
+        nombre TEXT NOT NULL,
+        contraseña TEXT NOT NULL
+    )
+    ''')
+
+    cursor.execute('''
+    CREATE TABLE IF NOT EXISTS cliente (
+        id INTEGER PRIMARY KEY AUTOINCREMENT, 
+        nombre TEXT NOT NULL,
+        email TEXT NOT NULL,
+        direccion TEXT,
+        empresa TEXT
+    )
+    ''')
+    
+    conn.commit()
+    conn.close()
+
 if __name__ == '__main__':
+    # Crear base de datos y tablas al iniciar la aplicación
+    crear_base_datos()
     app.run(debug=True)
-
-
-
-# Conectar (si no existe, se crea la base de datos)
-conn = sqlite3.connect('database/mi_base_de_datos.db')
-
-
-# Crear un cursor para ejecutar comandos SQL
-cursor = conn.cursor()
-
-
-# Crear una tabla (si no existe)
-cursor.execute('''
-CREATE TABLE IF NOT EXISTS ordencompra (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    producto TEXT NOT NULL,
-    cantidad TEXT NOT NULL,
-    precio INTEGER,
-    fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-)
-''')
-
-cursor.execute('''
-CREATE TABLE IF NOT EXISTS usuarios (
-    id INTEGER PRIMARY KEY AUTOINCREMENT, 
-    nombre TEXT NOT NULL,
-    contraseña TEXT NOT NULL
-)
-''')
-
-cursor.execute('''
-CREATE TABLE IF NOT EXISTS cliente (
-    id INTEGER PRIMARY KEY AUTOINCREMENT, 
-    nombre TEXT NOT NULL,
-    email TEXT NOT NULL,
-    direccion,
-    empresa TEXT NOT NULL
-)
-''')
-
-
-# Confirmar los cambios
-conn.commit()
-
-# Cerrar la conexión a la base de datos
-conn.close()
-
-
-
-# Crear usuario
-def crear_usuario(nombre, email):
-    conn = sqlite3.connect('mi_base_de_datos.db')
-    cursor = conn.cursor()
-    
-    try:
-        cursor.execute("INSERT INTO usuarios (nombre, email) VALUES (?, ?)", (nombre, email))
-        conn.commit()
-        print("Usuario creado correctamente.")
-    except sqlite3.IntegrityError:
-        print("El email ya está registrado.")
-    finally:
-        conn.close()
-
-# Leer todos los usuarios
-def obtener_usuarios():
-    conn = sqlite3.connect('mi_base_de_datos.db')
-    cursor = conn.cursor()
-    
-    cursor.execute("SELECT * FROM usuarios")
-    usuarios = cursor.fetchall()
-    
-    conn.close()
-    
-    return usuarios
-
-# Actualizar usuario
-def actualizar_usuario(id_usuario, nuevo_nombre, nuevo_email):
-    conn = sqlite3.connect('mi_base_de_datos.db')
-    cursor = conn.cursor()
-    
-    cursor.execute("UPDATE usuarios SET nombre = ?, email = ? WHERE id = ?", 
-                   (nuevo_nombre, nuevo_email, id_usuario))
-    conn.commit()
-    
-    conn.close()
-    print("Usuario actualizado correctamente.")
-
-# Eliminar usuario
-def eliminar_usuario(id_usuario):
-    conn = sqlite3.connect('mi_base_de_datos.db')
-    cursor = conn.cursor()
-    
-    cursor.execute("DELETE FROM usuarios WHERE id = ?", (id_usuario,))
-    conn.commit()
-    
-    conn.close()
-    print("Usuario eliminado correctamente.")
