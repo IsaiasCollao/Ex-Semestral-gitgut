@@ -8,13 +8,18 @@ app.secret_key = 'tu_clave_secreta_aqui'  # Necesario para manejar sesiones
 # Registrar el Blueprint de login
 app.register_blueprint(login_bp)
 
+
+@app.route('/catalogo')
+def catalogo():
+    return render_template('catalogo.html', titulo="Catálogo de Lingotes")
+
 @app.route('/')
 def inicio():
-    return render_template('principal.html')
+    return render_template('principal.html', titulo="Página Principal")
 
 @app.route('/formulario')
 def formulario():
-    return render_template('formulario.html')
+    return render_template('formulario.html', titulo="Formulario de Compra")
 
 @app.route('/agregar-compra', methods=['POST'])
 def agregar_compra():

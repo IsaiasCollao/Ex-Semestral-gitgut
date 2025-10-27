@@ -8,7 +8,7 @@
 </head>
 <body>
     <nav class ="navbar">
-            <a href="{{ url_for('formulario') }}">Ir al Formulario de Compra</a>
+        <a href="{{ url_for('catalogo') }}">Ver Catálogo</a>
         {% if session.usuario %}
         <a href="{{ url_for('login.logout') }}">Cerrar Sesión</a>
         <span>Bienvenido, {{ session.usuario }}!</span>

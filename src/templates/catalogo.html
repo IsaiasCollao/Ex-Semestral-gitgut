@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalogo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='catalogo.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+        <nav class ="navbar">
+            <a href="{{ url_for('inicio') }}">Ir a la Pagina Principal</a>
+        <a href="{{ url_for('catalogo') }}">Ver Catálogo</a>
+        {% if session.usuario %}
+        <a href="{{ url_for('login.logout') }}">Cerrar Sesión</a>
+        <span>Bienvenido, {{ session.usuario }}!</span>
+        {% else %}
+        <a href="{{ url_for('login.login') }}">Iniciar Sesión</a> 
+        {% endif %}
+    </nav>
+
+    <div class="cards-container">
+        <div class="card" style="width: 18rem;">
+            <img src="{{ url_for('static', filename='img/oro.png') }}" class="card-img-top" alt="imagen-card">
+            <div class="card-body">
+                <h5 class="card-title">Lingote de Oro</h5>
+                <p class="card-text">Lingote de oro de alta calidad.</p>
+                <p class="card-text">Precio: $500</p>
+    <a href="#" class="btn-comprar">Comprar</a>
+  </div>
+</div>
+
+<div class="cards-container">
+    <div class="card" style="width: 18rem;">
+        <img src="{{ url_for('static', filename='img/diamante.png') }}" class="card-img-top" alt="imagen-card">
+        <div class="card-body">
+            <h5 class="card-title">Lingote de Diamante</h5>
+            <p class="card-text">Lingote de diamante de alta calidad.</p>
+            <p class="card-text">Precio: $1000</p>
+    <a href="#" class="btn-comprar">Comprar</a>
+  </div>
+</div>
+
+<div class="cards-container">
+    <div class="card" style="width: 18rem;">
+        <img src="{{ url_for('static', filename='img/hierro.png') }}" class="card-img-top" alt="imagen-card">
+        <div class="card-body">
+            <h5 class="card-title">Lingote de Hierro</h5>
+            <p class="card-text">Lingote de hierro de alta calidad.</p>
+            <p class="card-text">Precio: $200</p>
+    <a href="#" class="btn-comprar">Comprar</a>
+  </div>
+</div>
+
+    
+</body>
+</html>

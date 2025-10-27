@@ -1,3 +1,6 @@
+\*IGNORE FILE*/
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,14 +10,17 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-<nav class="navbar">
-      <a href="{{ url_for('inicio') }}">Ir a la Pagina Principal</a>
+    <nav class ="navbar">
+        <a href="{{ url_for('inicio') }}">Ir a la Pagina Principal</a>
+        
+        <a href="{{ url_for('catalogo') }}">Ver Catálogo</a>
         {% if session.usuario %}
-       <a href="{{ url_for('login.logout') }}">Cerrar Sesión</a>
+        <a href="{{ url_for('login.logout') }}">Cerrar Sesión</a>
+        <span>Bienvenido, {{ session.usuario }}!</span>
         {% else %}
-       <a href="{{ url_for('login.login') }}">Iniciar Sesión</a>
+        <a href="{{ url_for('login.login') }}">Iniciar Sesión</a> 
         {% endif %}
-</nav>
+    </nav>
 <h1 class="titulo1">Formulario de Compra</h1>
 
 {% if mensaje %}
