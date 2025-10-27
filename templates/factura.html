@@ -1,0 +1,24 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factura de Compra</title>
+</head>
+<body>
+    <h1>Factura de Compra</h1>
+    <ul>
+        {% for item in carrito %}
+            <li>{{ item[1] }} - ${{ item[3] }}</li>
+        {% endfor %}
+    </ul>
+    
+
+    <p>Subtotal: ${{ total }}</p>
+    <p>IVA (16%): ${{ iva }}</p>
+    <p>Total con IVA: ${{ total_con_iva }}</p>
+    <br>
+    <a href="{{ url_for('index') }}">Volver al catálogo</a>
+</body>
+</html>
