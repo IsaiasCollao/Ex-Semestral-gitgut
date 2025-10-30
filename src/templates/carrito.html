@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='catalogo.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='carrito.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="{{ url_for('inicio') }}">Ir a la Página Principal</a>
+        <a href="{{ url_for('catalogo') }}">Ver Catálogo</a>
+        <a href="{{ url_for('ver_carrito') }}">Ver Carrito 🛒</a>
+        {% if session.usuario %}
+        <a href="{{ url_for('login.logout') }}">Cerrar Sesión</a>
+        <span>Bienvenido, {{ session.usuario }}!</span>
+        {% else %}
+        <a href="{{ url_for('login.login') }}">Iniciar Sesión</a> 
+        {% endif %}
+    </nav>
+
+    <div class="carrito-container">
+        <h1> Mi Carrito de Compras</h1>
+        
+        {% if productos %}
+            <table class="carrito-tabla">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Precio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in productos %}
+                    <tr>
+                        <td>{{ item.nombre }}</td>
+                        <td>${{ item.precio }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            
+            <h3 class="carrito-total">Total: ${{ total }}</h3>
+            
+            <div class="carrito-acciones">
+                <a href="{{ url_for('vaciar_carrito') }}" class="btn-vaciar">Eliminar Productos</a>
+                <a href="{{ url_for('catalogo') }}" class="btn-seguir">Seguir Comprando</a>
+            </div>
+        {% else %}
+            <p class="carrito-vacio">No hay Productos en el carrito!</p>
+            <a href="{{ url_for('catalogo') }}" class="btn-ir-catalogo">Ir al Catálogo</a>
+        {% endif %}
+    </div>
+</body>
+</html>

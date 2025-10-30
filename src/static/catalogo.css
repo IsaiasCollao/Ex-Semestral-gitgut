@@ -44,3 +44,28 @@
     text-align: center;
     margin-top: 10px;
 }
+
+.notificacion {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    z-index: 1000;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.notificacion.oculta {
+    opacity: 0;
+    transform: translateX(400px);
+    pointer-events: none;
+}
+
+.notificacion.visible {
+    opacity: 1;
+    transform: translateX(0);
+}

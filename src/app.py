@@ -9,17 +9,43 @@ app.secret_key = 'tu_clave_secreta_aqui'  # Necesario para manejar sesiones
 app.register_blueprint(login_bp)
 
 
+productos = [
+    {'id': 1, 'nombre': 'Lingote de Oro', 'precio': 500, 'imagen': 'oro.png'},
+    {'id': 2, 'nombre': 'Lingote de Diamante', 'precio': 1000, 'imagen': 'diamante.png'},
+    {'id': 3, 'nombre': 'Lingote de Hierro', 'precio': 200, 'imagen': 'hierro.png'},
+]
+
+
+@app.route('/agregar/<int:id>')
+def agregar(id):
+    producto = next((item for item in productos if item["id"] == id), None)
+    if producto:
+        if 'carrito' not in session:
+            session['carrito'] = []
+        session['carrito'].append(producto)
+        flash(f'Producto {producto["nombre"]} agregado al carrito.')
+    return redirect(url_for('catalogo'))
+
+@app.route('/carrito')
+def ver_carrito():
+    carrito = session.get('carrito', [])
+    total = sum(item['precio'] for item in carrito)
+    return render_template('carrito.html', titulo="Carrito de Compras", productos=carrito, total=total)
+
+@app.route('/vaciar-carrito')
+def vaciar_carrito():
+    session.pop('carrito', None)
+    return redirect(url_for('ver_carrito'))
+
+
 @app.route('/catalogo')
 def catalogo():
-    return render_template('catalogo.html', titulo="Catálogo de Lingotes")
+    return render_template('catalogo.html', titulo="Catálogo de Lingotes", productos=productos)
 
 @app.route('/')
 def inicio():
-    return render_template('principal.html', titulo="Página Principal")
+    return render_template('principal.html', titulo="Página Principal", productos=productos)
 
-@app.route('/formulario')
-def formulario():
-    return render_template('formulario.html', titulo="Formulario de Compra")
 
 @app.route('/agregar-compra', methods=['POST'])
 def agregar_compra():

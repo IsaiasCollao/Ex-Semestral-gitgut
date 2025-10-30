@@ -9,8 +9,8 @@
 </head>
 <body>
 
-        <nav class ="navbar">
-            <a href="{{ url_for('inicio') }}">Ir a la Pagina Principal</a>
+    <nav class ="navbar">
+        <a href="{{ url_for('inicio') }}">Ir a la Pagina Principal</a>
         <a href="{{ url_for('catalogo') }}">Ver Catálogo</a>
         {% if session.usuario %}
         <a href="{{ url_for('login.logout') }}">Cerrar Sesión</a>
@@ -18,6 +18,7 @@
         {% else %}
         <a href="{{ url_for('login.login') }}">Iniciar Sesión</a> 
         {% endif %}
+        <a href="{{ url_for('ver_carrito') }}">Ver Carrito 🛒</a>
     </nav>
 
     <div class="cards-container">
@@ -27,32 +28,30 @@
                 <h5 class="card-title">Lingote de Oro</h5>
                 <p class="card-text">Lingote de oro de alta calidad.</p>
                 <p class="card-text">Precio: $500</p>
-    <a href="#" class="btn-comprar">Comprar</a>
-  </div>
-</div>
+                <a href="{{ url_for('agregar', id=1) }}" class="btn-comprar">Agregar al Carrito</a>
+            </div>
+        </div>
 
-<div class="cards-container">
-    <div class="card" style="width: 18rem;">
-        <img src="{{ url_for('static', filename='img/diamante.png') }}" class="card-img-top" alt="imagen-card">
-        <div class="card-body">
-            <h5 class="card-title">Lingote de Diamante</h5>
-            <p class="card-text">Lingote de diamante de alta calidad.</p>
-            <p class="card-text">Precio: $1000</p>
-    <a href="#" class="btn-comprar">Comprar</a>
-  </div>
-</div>
+        <div class="card" style="width: 18rem;">
+            <img src="{{ url_for('static', filename='img/diamante.png') }}" class="card-img-top" alt="imagen-card">
+            <div class="card-body">
+                <h5 class="card-title">Lingote de Diamante</h5>
+                <p class="card-text">Lingote de diamante de alta calidad.</p>
+                <p class="card-text">Precio: $1000</p>
+                <a href="{{ url_for('agregar', id=2) }}" class="btn-comprar">Agregar al Carrito</a>
+            </div>
+        </div>
 
-<div class="cards-container">
-    <div class="card" style="width: 18rem;">
-        <img src="{{ url_for('static', filename='img/hierro.png') }}" class="card-img-top" alt="imagen-card">
-        <div class="card-body">
-            <h5 class="card-title">Lingote de Hierro</h5>
-            <p class="card-text">Lingote de hierro de alta calidad.</p>
-            <p class="card-text">Precio: $200</p>
-    <a href="#" class="btn-comprar">Comprar</a>
-  </div>
-</div>
+        <div class="card" style="width: 18rem;">
+            <img src="{{ url_for('static', filename='img/hierro.png') }}" class="card-img-top" alt="imagen-card">
+            <div class="card-body">
+                <h5 class="card-title">Lingote de Hierro</h5>
+                <p class="card-text">Lingote de hierro de alta calidad.</p>
+                <p class="card-text">Precio: $200</p>
+                <a href="{{ url_for('agregar', id=3) }}" class="btn-comprar">Agregar al Carrito</a>
+            </div>
+        </div>
+    </div>
 
-    
 </body>
 </html>

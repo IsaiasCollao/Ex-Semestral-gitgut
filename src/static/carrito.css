@@ -1,0 +1,33 @@
+.carrito-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+
+.carrito-tabla {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.carrito-tabla th, .carrito-tabla td {
+    border: 1px solid #ccc;
+    padding: 12px;
+    text-align: center;
+}
+
+.carrito-acciones a,
+.btn-ir-catalogo{
+    margin-top: 20px;
+    text-align: center;
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin: 0 10px;
+}

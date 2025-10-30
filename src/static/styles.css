@@ -4,6 +4,11 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.alert-script {
+    display: none;
+    text-align: center;
+}
+
 /* Navbar */
 .navbar {
     background-color: #333;
