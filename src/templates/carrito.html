@@ -23,7 +23,6 @@
 
     <div class="carrito-container">
         <h1> Mi Carrito de Compras</h1>
-        
         {% if productos %}
             <table class="carrito-tabla">
                 <thead>
@@ -41,12 +40,11 @@
                     {% endfor %}
                 </tbody>
             </table>
-            
             <h3 class="carrito-total">Total: ${{ total }}</h3>
-            
             <div class="carrito-acciones">
                 <a href="{{ url_for('vaciar_carrito') }}" class="btn-vaciar">Eliminar Productos</a>
                 <a href="{{ url_for('catalogo') }}" class="btn-seguir">Seguir Comprando</a>
+                <a href="{{ url_for('formulario') }}" class="btn-factura">Comprar</a>
             </div>
         {% else %}
             <p class="carrito-vacio">No hay Productos en el carrito!</p>

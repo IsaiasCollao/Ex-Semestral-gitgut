@@ -1,0 +1,53 @@
+.factura {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #ffffff;
+}
+
+.factura h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333333;
+}
+
+.factura ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.factura li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.factura li:last-child {
+    border-bottom: none;
+}
+.factura .item-nombre {
+    font-weight: 600;
+    color: #555555;
+}
+
+.factura .item-precio {
+    color: #888888;
+}
+
+.factura a {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.factura a:hover {
+    background-color: #218838;
+}
